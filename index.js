@@ -5,7 +5,6 @@ import cors from "cors";
 import process from "process";
 import { crops } from "./src/route/crops.js";
 import {join } from "path";
-import serverless from "serverless-http";
 const app = express();
 app.use(express.json());
 app.use(
@@ -36,19 +35,18 @@ app.get("/public/:name",async (req, res,next) => {
 app.get("/api/", (req, res) => {
   res.send("wlcome to youth fast");
 });
-// const server = async () => {
-//   try {
-//     process.stdout.write(`\x1b[2J`); //clear screen
-//     process.stdout.write(`\x1b[0f`); //set cursor to 0,0
-//     console.warn("\x1b[30m ▶️ Starting App :");
-//     await connection();
-//     app.listen(4000, () => {
-//       console.log(`\x1b[32m  🚀 http://localhost:4000/\x1b[0m`);
-//     });
-//   } catch (error) {
-//     console.log("server: " + error);
-//   }
-// };
+const server = async () => {
+  try {
+    process.stdout.write(`\x1b[2J`); //clear screen
+    process.stdout.write(`\x1b[0f`); //set cursor to 0,0
+    console.warn("\x1b[30m ▶️ Starting App :");
+    await connection();
+    app.listen(4000, () => {
+      console.log(`\x1b[32m  🚀 http://localhost:4000/\x1b[0m`);
+    });
+  } catch (error) {
+    console.log("server: " + error);
+  }
+};
 
-// server();
-export const handler = serverless(app);
+server();
