@@ -33,7 +33,7 @@ app.get("/public/:name",async (req, res,next) => {
     console.log(error);
   }
 });
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("wlcome to youth fast");
 });
 // const server = async () => {
