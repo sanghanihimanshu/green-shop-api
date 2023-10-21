@@ -9,6 +9,14 @@ export const auth = Router();
 auth.get("/", (req, res) => {
   res.send("you are in auth");
 });
+auth.get("/profile/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email});
+    res.send(user)
+  } catch (error) {
+    res.status(404).json(error) 
+  } 
+}); 
 auth.post("/signup", async (req, res) => {
   try {
     const registerd = await User.findOne({ email: req.body.email});

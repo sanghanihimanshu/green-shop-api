@@ -26,7 +26,7 @@ const CropsSchma = new Schema({
         required: true 
     },
     lastbider:{
-        type:Types.ObjectId,
+        type:String,
     },
     date:{
         type:Date,

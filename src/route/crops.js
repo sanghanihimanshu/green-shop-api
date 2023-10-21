@@ -24,6 +24,16 @@ crops.post("/user", async (req, res) => {
     res.json(err);
   }
 });
+crops.post("/order", async (req, res) => {
+
+  try {
+    const allcrops = await Crops.find({ lastbider: req.body.email });
+    res.send(allcrops);
+    // console.log(allcrops);
+  } catch (err) {
+    res.json(err);
+  }
+});
 crops.get("/product/:pid", async (req, res) => {
   try {
     const allcrops = await Crops.findById(req.params.pid)
@@ -81,7 +91,7 @@ crops.post("/makebid", async (req, res) => {
   try {
     const allcrops = await Crops.findOneAndUpdate(
       { _id: req.body.id },
-      {lastbid:req.body.amount}
+      {lastbid:req.body.amount,lastbider:req.body.email,basePrice:req.body.amount}
     );
     res.send(await Crops.findOne({ _id: req.body.id }));
   } catch (err) {
@@ -94,6 +104,8 @@ crops.post("/new",upload.single('image'),async (req, res,next) => {
     const AvlUser = await User.findOne({ email: req.body.email });
     req.body.owner = AvlUser._id;
     req.body.img=url;
+    req.body.lastbid=req.body.basePrice
+    req.body.lastbider="nobider avalible"
     const newcrop = new Crops(req.body);
     newcrop
       .save()
@@ -101,9 +113,9 @@ crops.post("/new",upload.single('image'),async (req, res,next) => {
         res.json(newcrop);
       })
       .catch((e) => {
-        res.json(e);
+        res.status(401).json(e.message);
       });
   } catch (err) {
-    res.json(err);
+    res.status(401).json(err);
   }
 });
