@@ -4,7 +4,12 @@ import { auth } from "./src/route/auth.js";
 import cors from "cors";
 import process from "process";
 import { crops } from "./src/route/crops.js";
-import {join } from "path";
+import {join,dirname} from "path";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 app.use(express.json());
 app.use(
@@ -17,7 +22,7 @@ app.use("/auth", auth);
 app.use("/crops", crops);
 app.get("/public/:name",async (req, res,next) => {
   const options = {
-    root: join('E:/SAL-project/api/',"public"),
+    root: join(__dirname,"public"),
   };
   try {
     setTimeout(()=>{
@@ -50,3 +55,4 @@ const server = async () => {
 };
 
 server();
+export default app

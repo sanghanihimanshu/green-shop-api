@@ -28,7 +28,7 @@ auth.post("/signup", async (req, res) => {
         `http://localhost:5173/auth/verify?token=${jwt.sign(
           { email: NewUser.email, password: NewUser.password },
           process.env.TOKEN_SECRET,
-          { expiresIn: "10m" }
+          { expiresIn: "10m" } 
         )}`
       );
       NewUser.save()
@@ -41,6 +41,7 @@ auth.post("/signup", async (req, res) => {
             res.status(200);
         })
         .catch((error) => {
+          console.log(error);
           res.status(401).json({
             res: error.message,
           });
@@ -52,6 +53,7 @@ auth.post("/signup", async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(401).json({
       message: error,
     });

@@ -1,11 +1,12 @@
 {
-  "name": "youth-fast",
+  "name": "green-shop-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon node ."
+    "dev": "nodemon node .",
+    "start": "node api/index.js"
   },
   "author": "",
   "license": "ISC",
