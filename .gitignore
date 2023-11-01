@@ -26,3 +26,4 @@ dist-ssr
 public
 # Local Netlify folder
 .netlify
+.vercel

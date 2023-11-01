@@ -38,7 +38,7 @@ app.get("/public/:name",async (req, res,next) => {
   }
 });
 app.get("/", (req, res) => {
-  res.send("wlcome to youth fast");
+  res.send("wlcome to green-shop");
 });
 const server = async () => {
   try {
