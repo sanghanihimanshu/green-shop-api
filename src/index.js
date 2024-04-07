@@ -1,9 +1,9 @@
 import express from "express";
-import { connection } from "./src/db/connect.js"; //clear screen
-import { auth } from "./src/route/auth.js";
+import { connection } from "./db/connect.js"; //clear screen
+import { auth } from "./route/auth.js";
 import cors from "cors";
 import process from "process";
-import { crops } from "./src/route/crops.js";
+import { crops } from "./route/crops.js";
 
 const app = express();
 app.use(express.json());
