@@ -14,7 +14,7 @@ auth.get("/profile/:email", async (req, res) => {
     const user = await User.findOne({ email: req.params.email});
     res.send(user)
   } catch (error) {
-    res.status(404).json(error) 
+    res.status(404).json({error:"user not found"}) 
   } 
 }); 
 auth.post("/signup", async (req, res) => {
@@ -41,21 +41,19 @@ auth.post("/signup", async (req, res) => {
             res.status(200);
         })
         .catch((error) => {
-          console.log(error);
           res.status(401).json({
-            res: error.message,
+            error: error.message,
           });
         });
     } else {
       res.status(401).json({
-        message: "user alredy exist",
-        email: registerd.email,
+        error: "user alredy exist with"+ registerd.email,
       });
     }
   } catch (error) {
     console.log(error);
     res.status(401).json({
-      message: error,
+      error: error.message,
     });
   }
 });
@@ -73,11 +71,11 @@ auth.post("/login",autenticatetoken,async (req, res) => {
         return;
       }
     } else {
-      res.status(401).json({ message: "user not avalable" });
+      res.status(401).json({ error: "user not avalable" });
       return;
     }
   } catch (error) {
-    console.log(error);
+    res.status(401).json({ error: "user not avalable" });
     return;
   }
 }

@@ -63,7 +63,7 @@ crops.post("/user/:pid", async (req, res) => {
     });
     res.send(allcrops);
   } catch (err) {
-    res.json(err);
+    res.json({error:err.message});
   }
 });
 crops.post("/remove", async (req, res) => {
@@ -71,7 +71,7 @@ crops.post("/remove", async (req, res) => {
     const allcrops = await Crops.findOneAndDelete({ _id: req.body.pid });
     res.send(allcrops);
   } catch (err) {
-    res.json(err);
+    res.json({error:err.message});
   }
 });
 crops.post("/update", async (req, res) => {
@@ -82,7 +82,7 @@ crops.post("/update", async (req, res) => {
     );
     res.send(await Crops.findOne({ _id: req.body.pid }));
   } catch (err) {
-    res.json(err);
+    res.json({error:err.message});
   }
 });
 crops.post("/makebid", async (req, res) => {
@@ -93,7 +93,7 @@ crops.post("/makebid", async (req, res) => {
     );
     res.send(await Crops.findOne({ _id: req.body.id }));
   } catch (err) {
-    res.json(err);
+    res.json({error:err.message});
   }
 }); 
 crops.post("/new",async (req, res,next) => {
@@ -108,10 +108,10 @@ crops.post("/new",async (req, res,next) => {
       .then(() => {   
         res.json(newcrop);
       })
-      .catch((e) => {
-        res.status(401).json(e.message);
+      .catch((err) => {
+        res.status(401).json({error:err.message});
       });
   } catch (err) {
-    res.status(401).json({"error":err});
+    res.status(401).json({"error":err.message});
   }
 });
