@@ -4,11 +4,6 @@ import { auth } from "./src/route/auth.js";
 import cors from "cors";
 import process from "process";
 import { crops } from "./src/route/crops.js";
-import {join,dirname} from "path";
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -20,23 +15,6 @@ app.use(
 app.use(cors());
 app.use("/auth", auth);
 app.use("/crops", crops);
-app.get("/public/:name",async (req, res,next) => {
-  const options = {
-    root: join(__dirname,"public"),
-  };
-  try {
-    setTimeout(()=>{
-      res.sendFile(req.params.name, options, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-    },25)
-    
-  } catch (error) { 
-    console.log(error);
-  }
-});
 app.get("/", (req, res) => {
   res.send("wlcome to green-shop");
 });

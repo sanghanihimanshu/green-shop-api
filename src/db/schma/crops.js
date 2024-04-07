@@ -7,6 +7,7 @@ const CropsSchma = new Schema({
     },
     img:{
         type:String,
+        require:true,
     },
     description:{
         type:String,
@@ -27,6 +28,7 @@ const CropsSchma = new Schema({
     },
     lastbider:{
         type:String,
+        default:"no data available"
     },
     date:{
         type:Date,
@@ -43,7 +45,7 @@ const CropsSchma = new Schema({
     },
     owner:{
         type:Types.ObjectId,
-        required:true
+        required:true,
     }
 })
 export const Crops = model('Crops',CropsSchma)

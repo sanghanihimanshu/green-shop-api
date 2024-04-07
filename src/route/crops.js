@@ -1,8 +1,6 @@
 import { Router } from "express";
 import { Crops } from "../db/schma/crops.js";
 import { User } from "../db/schma/signup.js";
-import { upload } from "../utils/fileuplode.js";
-
 export const crops = Router();
 
 crops.get("/all", async (req, res) => {
@@ -97,15 +95,13 @@ crops.post("/makebid", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-});
-crops.post("/new",upload.single('image'),async (req, res,next) => {
+}); 
+crops.post("/new",async (req, res,next) => {
   try {
-    const url = req.protocol + '://' + req.get('host')+ '/public/' + req.file.filename
     const AvlUser = await User.findOne({ email: req.body.email });
     req.body.owner = AvlUser._id;
-    req.body.img=url;
     req.body.lastbid=req.body.basePrice
-    req.body.lastbider="nobider avalible"
+    req.body.lastbider="no bider avalible"
     const newcrop = new Crops(req.body);
     newcrop
       .save()
@@ -116,6 +112,6 @@ crops.post("/new",upload.single('image'),async (req, res,next) => {
         res.status(401).json(e.message);
       });
   } catch (err) {
-    res.status(401).json(err);
+    res.status(401).json({"error":err});
   }
 });

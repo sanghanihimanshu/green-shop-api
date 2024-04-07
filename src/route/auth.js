@@ -23,14 +23,14 @@ auth.post("/signup", async (req, res) => {
     req.body.password = await hashPassword(req.body.password);
     if (!registerd) {
       const NewUser = new User(req.body);
-      await Mail(
-        req.body.email,
-        `http://localhost:5173/auth/verify?token=${jwt.sign(
-          { email: NewUser.email, password: NewUser.password },
-          process.env.TOKEN_SECRET,
-          { expiresIn: "10m" } 
-        )}`
-      );
+      // await Mail(
+      //   req.body.email,
+      //   `http://localhost:5173/auth/verify?token=${jwt.sign(
+      //     { email: NewUser.email, password: NewUser.password },
+      //     process.env.TOKEN_SECRET,
+      //     { expiresIn: "10m" } 
+      //   )}`
+      // );
       NewUser.save()
         .then(async () => {
           res.json({
