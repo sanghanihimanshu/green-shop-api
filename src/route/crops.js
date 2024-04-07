@@ -98,7 +98,7 @@ crops.post("/makebid", async (req, res) => {
 }); 
 crops.post("/new",async (req, res,next) => {
   try {
-    const AvlUser = await User.findOne({ email: req.body.email });
+    const AvlUser = await User.findOne({ email: req.body.email});
     req.body.owner = AvlUser._id;
     req.body.lastbid=req.body.basePrice
     req.body.lastbider="no bider avalible"
