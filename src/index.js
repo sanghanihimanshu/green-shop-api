@@ -12,7 +12,9 @@ app.use(
     extended: false,
   })
 );
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+}));
 app.use("/auth", auth);
 app.use("/crops", crops);
 app.get("/", (req, res) => {
